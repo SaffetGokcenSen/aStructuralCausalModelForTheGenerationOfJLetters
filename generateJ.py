@@ -79,7 +79,7 @@ for theIndex in range(numOfSamples):
         sample_cap_length = sample_right_n - sample_left_n + 1 
         seed1 = 41+theIndex 
         size1 = sample_cap_length-1 
-        seed2 = 51+theIndex
+        seed2 = 51+numOfSamples+theIndex
         random_deviations = randomDeviations(seed1, size1, seed2, p_zero_dev_m) 
 
         cap_mn_array = np.zeros((sample_cap_length, 2), dtype=int)
@@ -98,19 +98,19 @@ for theIndex in range(numOfSamples):
             np.quantile(right_to_left_list, 0.25)).astype(int) 
     vertical_start_upper = np.round(
             np.quantile(right_to_left_list, 0.75)).astype(int) 
-    rng7 = np.random.default_rng(seed=61+theIndex) 
+    rng7 = np.random.default_rng(seed=61+2*numOfSamples+theIndex) 
     vertical_start_n = rng7.integers(vertical_start_lower, vertical_start_upper+1) 
     
     if (samples[theIndex] == 1): 
         vertical_start_m = m_array[sample_right_n-vertical_start_n] + 1 
     else: 
-        rng = np.random.default_rng(seed=71+theIndex)
+        rng = np.random.default_rng(seed=71+3*numOfSamples+theIndex)
         vertical_start_m = rng.integers(0, 5)
     
     var_E_ver_part_length = variable_E_height-vertical_start_m
-    seed1 = 81 + theIndex 
+    seed1 = 81 + 4*numOfSamples + theIndex 
     size1 = var_E_ver_part_length 
-    seed2 = 91 + theIndex 
+    seed2 = 91 + 5*numOfSamples + theIndex 
     pZero = p_zero_dev_n
     random_dev = randomDeviations(seed1, size1, seed2, pZero) 
     
@@ -123,11 +123,11 @@ for theIndex in range(numOfSamples):
     im, vertical_E_mn_array, current_m, current_n = drawVertical(
             im, drawnArray, drawActLength, initial_m, initial_n, randomDevs)
     
-    seed1 = 101 + theIndex 
+    seed1 = 101 + 6*numOfSamples + theIndex 
     ver_start_m_F = variable_E_height 
     var_F_ver_part_length = variable_F_m_upper_bound+1-ver_start_m_F
     size1 = var_F_ver_part_length 
-    seed2 = 111 + theIndex 
+    seed2 = 111 + 7*numOfSamples + theIndex 
     pZero = p_zero_dev_n_F
     random_dev = randomDeviations(seed1, size1, seed2, pZero) 
 
@@ -155,9 +155,9 @@ for theIndex in range(numOfSamples):
 
     if (ver_stop_m_G > 19):
         var_G_ver_part_length = ver_stop_m_G+1-19 
-        seed1 = 121 + theIndex 
+        seed1 = 121 + 8*numOfSamples + theIndex 
         size1 = var_G_ver_part_length
-        seed2 = 131 + theIndex
+        seed2 = 131 + 9*numOfSamples + theIndex
         pZero = p_zero_dev_n_G
         random_dev = randomDeviations(seed1, size1, seed2, pZero)
 
